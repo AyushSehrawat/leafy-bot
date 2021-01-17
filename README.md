@@ -39,3 +39,20 @@ Commands:
 
 * Extra: invite ( add Leafy!) , vote ( Vote for Leafy!) , suggest ( Suggest us )
 
+
+### Install Modules/ Dependancies 
+
+```
+pip install -r requirements.txt
+```
+
+
+
+#### Sample layout of `.env` file
+
+```bash
+BOT_TOKEN=token_here
+MONGO_URL = url_here
+ALEX = token_here
+```
+
