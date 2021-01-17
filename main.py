@@ -172,18 +172,6 @@ async def reload(ctx, extension):
 		await ctx.send('Done')
 
 
-# Slang Filter Here ! Sorry for nay abuse :()
-
-#with open('profanity.txt', 'r') as f:
-#profanity = f.read().split(', ')
-
-#@client.event
-#async def on_message(msg):
-#for word in profanity:
-#if word in msg.content.lower():
-#await msg.delete()
-
-#await client.process_commands(msg)
 
 
 @client.event
@@ -202,8 +190,6 @@ async def on_message(msg):
         await msg.channel.send(embed=embed)
     await client.process_commands(msg)
 
-
-# Slang filter ends
 
 for filename in os.listdir('./cogs'):
 	if filename.endswith('.py'):
