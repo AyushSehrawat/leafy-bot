@@ -83,7 +83,7 @@ class Help(commands.Cog):
             embed = discord.Embed(
                 timestamp=ctx.message.created_at,
                 description=
-                f"```Here are the fun commands```\n`{a}ascii <text>`\n`{a}ga <name> - Guess the age of given name`\n`{a}cat`\n`{a}dog`\n`{a}password <length>`\n`{a}ly <song_name>`\n`{a}sendnuke <user/id>`\n`{a}roast <user/id>`\n`{a}8ball <question>`\n`{a}choose <*args>`\n`{a}choosebestof <*args>`\n`{a}lenny`\n`{a}meme`\n`{a}joke`\n`{a}ipinfo <ip/website>`\n`{a}calc <expression>`\n`{a}activity <num> - Tells activity for given number of persons`\n`{a}remind <time> <type> <*msg> - To set a timer`\n`{a}guess - Guess the person you thought`\n`{a}bird`\n`{a}fml`\n`{a}sadcat`\n",
+                f"```Here are the fun commands```\n`{a}ascii <text>`\n`{a}ga <name> - Guess the age of given name`\n`{a}cat`\n`{a}dog`\n`{a}password <length>`\n`{a}ly <song_name>`\n`{a}sendnuke <user/id>`\n`{a}roast <user/id>`\n`{a}8ball <question>`\n`{a}choose <*args>`\n`{a}choosebestof <*args>`\n`{a}lenny`\n`{a}meme`\n`{a}joke`\n`{a}ipinfo <ip/website>`\n`{a}calc <expression>`\n`{a}activity <num> - Tells activity for given number of persons`\n`{a}remind <time> <type> <*msg> - To set a timer`\n`{a}guess - Guess the person you thought`\n`{a}bird`\n`{a}fml`\n`{a}sadcat`\n`{a}say <*msg>",
                 color=0xff0000
             )
             embed.set_author(
@@ -171,3 +171,4 @@ class Help(commands.Cog):
 
 def setup(client):
     client.add_cog(Help(client))
+
