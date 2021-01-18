@@ -4,7 +4,7 @@
 # Leafy-Bot
 **A multipurpose bot for Discord coded in Discord.py**
 
-[Add Leafy To Your Server](https://dsc.gg/leafy) | [Join Support Server](https://dsc.gg/leafyserver) 
+[Add Leafy To Your Server](https://dsc.gg/leafy) - [Join Support Server](https://dsc.gg/leafyserver) - [Website](https://leafy.algoriq.live)
 
 <img alt="Leafy-Logo" align="right" src="https://i.imgur.com/qDVEowI.png" width=40%/>
 
