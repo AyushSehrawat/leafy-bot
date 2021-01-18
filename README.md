@@ -14,11 +14,11 @@ Code here serves for education purposes only
 ## Features and Commands
 
 There are a lot of features and many of the commands are dependant on mongoDB
-it's preferred that you create a cluster on mongoDB and create the following collections
+it's preferred that you create a cluster on mongoDB and create the following collections in order to use the database based commands 
 
 ![Like this](https://i.imgur.com/JlYlvqE.png)
 
-in order to use the database based commands 
+
 
 
 Commands:
