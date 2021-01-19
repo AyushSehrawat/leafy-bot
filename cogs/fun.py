@@ -76,7 +76,7 @@ class Fun(commands.Cog):
                 await ctx.send(embed=embed)
 
     @commands.command()
-    async def say(self,ctx,tit,desc):
+    async def say(self,ctx,tit,*,desc):
         if len(tit) > 60 or len(desc) > 80:
             await ctx.send('**Too big sentence**')
         else:
