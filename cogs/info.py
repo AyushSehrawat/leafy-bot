@@ -3,6 +3,7 @@ from discord.ext import commands
 from discord.ext.commands import cooldown, BucketType
 import psutil
 import os
+import datetime
 
 
 class Info(commands.Cog):
@@ -13,7 +14,6 @@ class Info(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print('Info Cog Loaded Succesfully')
-        
 
     @commands.command(hidden=True)
     async def spoon(self, ctx):
@@ -36,7 +36,8 @@ class Info(commands.Cog):
         embed = discord.Embed(color=0xff0000)
         embed.add_field(
             name="\u200b",
-            value=f"Bot latency - {round(self.client.latency * 1000)}ms",
+            value=
+            f"<a:loading:800583154951651348> Bot latency - {round(self.client.latency * 1000)}ms",
             inline=False)
         embed.set_author(
             name="Latency",
@@ -46,11 +47,9 @@ class Info(commands.Cog):
 
         await ctx.send(embed=embed)
 
-
     @commands.command(
-        description = 'Sends your avatar pic or of mentioned user / id'
-    )
-    async def avatar(self,ctx,member : discord.Member=None):
+        description='Sends your avatar pic or of mentioned user / id')
+    async def avatar(self, ctx, member: discord.Member = None):
         if member is None:
             member = ctx.author
             a = member.avatar_url
@@ -66,7 +65,8 @@ class Info(commands.Cog):
     async def memcount(self, ctx):
         embed = discord.Embed(
             title=f"{ctx.guild}",
-            description=f"There are {ctx.guild.member_count} members in this server",
+            description=
+            f"There are {ctx.guild.member_count} members in this server",
             color=0xff0000)
         await ctx.send(embed=embed)
 
@@ -76,7 +76,7 @@ class Info(commands.Cog):
         embed = discord.Embed(
             title='Hi! Use these links to add me or join my support server',
             description=
-            "**[Add Me](https://discord.com/api/oauth2/authorize?client_id=791888515100573727&permissions=8&scope=bot) | [Support Server](https://discord.gg/grr47CR8y8)**",
+            "**[Add Me](https://discord.com/api/oauth2/authorize?client_id=791888515100573727&permissions=1610477559&scope=bot) | [Support Server](https://discord.gg/grr47CR8y8)**",
             color=0xff0000)
         await ctx.send(embed=embed)
 
@@ -85,14 +85,14 @@ class Info(commands.Cog):
         await ctx.send(f'There are {len(self.client.commands)} commands')
 
     @commands.command(hidden=True)
-    async def emoji(self,ctx):
+    async def emoji(self, ctx):
         if ctx.author.id == 727365670395838626:
             for emoji in ctx.guild.emojis:
                 print(f"{emoji.id} - {emoji.name}")
             await ctx.message.delete()
 
     @commands.command(description='Vote Leafy')
-    async def vote(self,ctx):
+    async def vote(self, ctx):
         embed = discord.Embed(
             title='Vote leafy !',
             description=
@@ -100,7 +100,9 @@ class Info(commands.Cog):
             color=0xff0000)
         await ctx.send(embed=embed)
 
+        
 
 
 def setup(client):
     client.add_cog(Info(client))
+    
