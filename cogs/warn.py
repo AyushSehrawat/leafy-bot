@@ -33,7 +33,7 @@ class Warn(commands.Cog):
     async def warn(self,ctx,member: discord.Member,warns=1,*,reason = 'Not specified'):
         guild = ctx.guild
         if guild.me.top_role < member.top_role:
-            await ctx.send('**He is higher than me in hierarchy**')
+            await ctx.send('**Member is higher than me in hierarchy**')
         elif member.bot:
             await ctx.send('**You cannot warn bot**')
         elif member == ctx.author:
