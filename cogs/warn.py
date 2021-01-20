@@ -7,7 +7,7 @@ import motor.motor_asyncio
 import nest_asyncio
 nest_asyncio.apply()
 
-sys.path.append("/MiniBot/discord_pass.py")
+sys.path.append("/MiniBot/discord_pass.py") # Replace with yours
 import os
 
 mongo_url = os.environ.get('MONGO_URL')
@@ -80,7 +80,7 @@ class Warn(commands.Cog):
                     }, {"$set": {
                         "warns": total_warn
                     }})
-                    await warndb.update({ 'id': member.id },{"$addToSet":{"Cases":[passwor, reason,ctx.author.mention,warns]}})
+                    await warndb.update_one({ 'id': member.id },{"$addToSet":{"Cases":[passwor, reason,ctx.author.mention,warns]}})
             
                     embed = discord.Embed(
                         title="Warn",
