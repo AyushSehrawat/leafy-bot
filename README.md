@@ -27,7 +27,7 @@ Commands:
 
 * General: rank, lb, ping, avatar, wiki, search, note, notes, trash, poll, quickpoll, remind
 
-* Fun: ascii, ga, cat, dog, password, ly, sendnuke, roast, 8ball, choose, choosebestof, lenny, meme, joke, ipinfo, calc, activity, remind, guess, bird, fml, sadcat, say
+* Fun: ascii, ga, cat, dog, password, ly, sendnuke, roast, 8ball, choose, choosebestof, lenny, meme, joke, ipinfo, calc, activity, remind, guess, bird, fml, sadcat, say, bj
 
 * Bow owner commands: load/unload cogs, jsk cog - Can be used to run python scripts, shell and much more! Check docs [here](https://jishaku.readthedocs.io/en/latest/index.html)
 
