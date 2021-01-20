@@ -28,7 +28,7 @@ class Mod(commands.Cog):
             await ctx.send('**Haha, i am immortal**')
 
         elif guild.me.top_role < member.top_role:
-            await ctx.send('**He is higher than me in hierarchy**')
+            await ctx.send('**Member is higher than me in hierarchy**')
         elif member.bot:
             await ctx.send('**You cannot ban bot**')
         elif member == ctx.author:
@@ -78,7 +78,7 @@ class Mod(commands.Cog):
         if member == self.client.user:
             await ctx.send('**Haha, i am immortal**')
         elif guild.me.top_role < member.top_role:
-            await ctx.send('**He is higher than me in hierarchy**')
+            await ctx.send('**Member is higher than me in hierarchy**')
         elif member.bot:
             await ctx.send('**You cannot kick bot**')
         elif member == ctx.author:
@@ -103,7 +103,7 @@ class Mod(commands.Cog):
         if member == self.client.user:
             await ctx.send('**Haha, i am immortal**')
         elif guild.me.top_role < member.top_role:
-            await ctx.send('**He is higher than me in hierarchy**')
+            await ctx.send('**Member is higher than me in hierarchy**')
         elif member.bot:
             await ctx.send('**You cannot ban bot**')
         elif member == ctx.author:
@@ -129,7 +129,7 @@ class Mod(commands.Cog):
         if user == self.client.user:
             await ctx.send('**Haha, i am immortal**')
         elif guild.me.top_role < user.top_role:
-            await ctx.send('**He is higher than me in hierarchy**')
+            await ctx.send('**Member is higher than me in hierarchy**')
         elif user.bot:
             await ctx.send('**You cannot mute bot**')
         elif user == ctx.author:
@@ -181,7 +181,7 @@ class Mod(commands.Cog):
         role = discord.utils.get(ctx.guild.roles, name="Muted")
         guild = ctx.guild
         if guild.me.top_role < user.top_role:
-            await ctx.send('**He is higher than me in hierarchy**')
+            await ctx.send('**Member is higher than me in hierarchy**')
         elif role not in user.roles:
             embed = discord.Embed(
                 title="Invalid usage",
@@ -211,7 +211,7 @@ class Mod(commands.Cog):
                       rolename: discord.Role):
         guild = ctx.guild
         if guild.me.top_role < member.top_role:
-            await ctx.send('**He is higher than me in hierarchy**')
+            await ctx.send('**Member is higher than me in hierarchy**')
         elif rolename in ctx.guild.roles:
             await member.add_roles(rolename)
             embed = discord.Embed(
@@ -240,7 +240,7 @@ class Mod(commands.Cog):
                      rolename: discord.Role):
         guild = ctx.guild
         if guild.me.top_role < member.top_role:
-            await ctx.send('**He is higher than me in hierarchy**')
+            await ctx.send('**Member is higher than me in hierarchy**')
         elif rolename in ctx.guild.roles:
 
             await member.remove_roles(rolename)
@@ -337,7 +337,7 @@ class Mod(commands.Cog):
         if member == self.client.user:
             await ctx.send('**Haha, i am immortal**')
         elif guild.me.top_role < member.top_role:
-            await ctx.send('**He is higher than me in hierarchy**')
+            await ctx.send('**Member is higher than me in hierarchy**')
         elif member.bot:
             await ctx.send('**You cannot block bot**')
         elif member == ctx.author:
