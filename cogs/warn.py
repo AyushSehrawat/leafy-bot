@@ -7,7 +7,7 @@ import motor.motor_asyncio
 import nest_asyncio
 nest_asyncio.apply()
 
-sys.path.append("/MiniBot/discord_pass.py") # Replace with yours
+sys.path.append("/MiniBot/discord_pass.py")
 import os
 
 mongo_url = os.environ.get('MONGO_URL')
@@ -31,72 +31,77 @@ class Warn(commands.Cog):
         description='Warn a user ( If limit > 5 , the member is banned )')
     @commands.has_permissions(ban_members=True)
     async def warn(self,ctx,member: discord.Member,warns=1,*,reason = 'Not specified'):
-        guild = ctx.guild
-        if guild.me.top_role < member.top_role:
-            await ctx.send('**Member is higher than me in hierarchy**')
-        elif member.bot:
-            await ctx.send('**You cannot warn bot**')
-        elif member == ctx.author:
-            await ctx.send('**You cannot warn yourself**')
-        elif member != ctx.author:
-            
-            if len(reason) > 60:
-                await ctx.send('**Very big reason**')
-            else:
-
-                stats = await warndb.find_one({"id": member.id})
-
-                if member == self.client.user:
-                    await ctx.send('**Haha, i am immortal**')
-                elif stats is None and warns <= 5:
-                    passwor = discord_pass.secure_password_gen(10)
-                    passwor = str(passwor)
-                    newuser =     {"id":member.id, "Cases" : [[passwor, reason,ctx.author.mention,warns]],'warns' : warns}
-                    await warndb.insert_one(newuser)
-                    embed = discord.Embed(
-                        title="Warn",
-                        description=
-                        f"{member.name} has been warned with {warns} warn(s) for `{reason}` ",
-                        color=0xff0000)
-                    await ctx.send(embed=embed)
-
-                elif warns > 5:
-                    embed = discord.Embed(
-                        title="Invalid usage",
-                        description="You cannot give more than 5 warns",
-                        color=0xff0000)
-                    embed.set_image(
-                        url=
-                        "https://media1.tenor.com/images/7cb7b5cc74e9a63d11e474a3e135d617/tenor.gif"
-                    )
-                    await ctx.send(embed=embed)
-
+        if warns not in range(0,6):
+            await ctx.send('**Exceeding the warn limit**')
+        else:
+            guild = ctx.guild
+            if guild.me.top_role < member.top_role:
+                await ctx.send('**Member is higher than me in hierarchy**')
+            elif member.bot:
+                await ctx.send('**You cannot warn bot**')
+            elif member == ctx.author:
+                await ctx.send('**You cannot warn yourself**')
+            elif member != ctx.author:
+                
+                if len(reason) > 60:
+                    await ctx.send('**Very big reason**')
                 else:
-                    passwor = discord_pass.secure_password_gen(10)
-                    passwor = str(passwor)
-                    total_warn = stats["warns"] + warns
-                    await warndb.update_one({
-                        "id": member.id
-                    }, {"$set": {
-                        "warns": total_warn
-                    }})
-                    await warndb.update_one({ 'id': member.id },{"$addToSet":{"Cases":[passwor, reason,ctx.author.mention,warns]}})
-            
-                    embed = discord.Embed(
-                        title="Warn",
-                        description=
-                        f"{member.name} has been warned with {warns} warn(s) for `{reason}` ",
-                        color=0xff0000)
-                    await ctx.send(embed=embed)
 
-                    if total_warn >= 5:
-                        await member.ban(reason="Exceeded The Warn Limit")
+                    stats = await warndb.find_one({"id": member.id})
+
+                    if member == self.client.user:
+                        await ctx.send('**Haha, i am immortal**')
+                    elif stats is None and warns <= 5:
+                        passwor = discord_pass.secure_password_gen(10)
+                        passwor = str(passwor)
+                        newuser =     {"id":member.id, "Cases" : [[passwor, reason,ctx.author.mention,warns]],'warns' : warns}
+                        await warndb.insert_one(newuser)
                         embed = discord.Embed(
                             title="Warn",
                             description=
-                            f"{member.name} has been banned since he exceeded the warn limit",
+                            f"{member.name} has been warned with {warns} warn(s) for `{reason}` ",
                             color=0xff0000)
                         await ctx.send(embed=embed)
+
+                    elif warns > 5:
+                        embed = discord.Embed(
+                            title="Invalid usage",
+                            description="You cannot give more than 5 warns",
+                            color=0xff0000)
+                        embed.set_image(
+                            url=
+                            "https://media1.tenor.com/images/7cb7b5cc74e9a63d11e474a3e135d617/tenor.gif"
+                        )
+                        await ctx.send(embed=embed)
+
+                    else:
+                        passwor = discord_pass.secure_password_gen(10)
+                        passwor = str(passwor)
+                        total_warn = stats["warns"] + warns
+                        await warndb.update_one({
+                            "id": member.id
+                        }, {"$set": {
+                            "warns": total_warn
+                        }})
+                        await warndb.update_one({ 'id': member.id },{"$addToSet":{"Cases":[passwor, reason,ctx.author.mention,warns]}})
+                
+                        embed = discord.Embed(
+                            title="Warn",
+                            description=
+                            f"{member.name} has been warned with {warns} warn(s) for `{reason}` ",
+                            color=0xff0000)
+                        await ctx.send(embed=embed)
+
+                        if total_warn >= 5:
+                            await member.ban(reason="Exceeded The Warn Limit")
+                            embed = discord.Embed(
+                                title="Warn",
+                                description=
+                                f"{member.name} has been banned since he exceeded the warn limit",
+                                color=0xff0000)
+                            await ctx.send(embed=embed)
+
+                            await warndb.delete_one({"id": member.id})
 
 
 
