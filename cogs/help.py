@@ -49,7 +49,7 @@ class Help(commands.Cog):
             embed = discord.Embed(
                 timestamp=ctx.message.created_at,
                 description=
-                f'```Here are the general commands```\n`{a}rank - To know your rank`\n`{a}lb - To see the leaderboard`\n`{a}ping - To know bot latency`\n`{a}avatar <user/id>- See the avatar`\n`{a}wiki <msg> - Search on wikipedia`\n`{a}search <msg> - See top results`\n`{a}note <msg> - Make a note for you and save it`\n`{a}notes - See your note(s)`\n`{a}trash - Delete your note(s)`\n`{a}poll <question> - Creates an interactive poll`\n`{a}quickpoll <*question , options>`\n`{a}remind/reminder/notify <time s/m/h/d> <*msg>`\n',
+                f'```Here are the general commands```\n`{a}rank - To know your rank`\n`{a}lb - To see the leaderboard`\n`{a}ping - To know bot latency`\n`{a}avatar <user/id>- See the avatar`\n`{a}wiki <msg> - Search on wikipedia`\n`{a}search <msg> - See top results`\n`{a}note <msg> - Make a note for you and save it`\n`{a}notes - See your note(s)`\n`{a}trash - Delete your note(s)`\n`{a}poll <question> - Creates an interactive poll`\n`{a}quickpoll <*question , options>`\n`{a}remind/reminder/notify <time s/m/h/d> <*msg>`\n`{a}pip/pypi <name>`\n',
                 color=0xff0000
             )
             embed.set_author(
@@ -83,7 +83,7 @@ class Help(commands.Cog):
             embed = discord.Embed(
                 timestamp=ctx.message.created_at,
                 description=
-                f"```Here are the fun commands```\n`{a}ascii <text>`\n`{a}ga <name> - Guess the age of given name`\n`{a}cat`\n`{a}dog`\n`{a}password <length>`\n`{a}ly <song_name>`\n`{a}sendnuke <user/id>`\n`{a}roast <user/id>`\n`{a}8ball <question>`\n`{a}choose <*args>`\n`{a}choosebestof <*args>`\n`{a}lenny`\n`{a}meme`\n`{a}joke`\n`{a}ipinfo <ip/website>`\n`{a}calc <expression>`\n`{a}activity <num> - Tells activity for given number of persons`\n`{a}remind <time> <type> <*msg> - To set a timer`\n`{a}guess - Guess the person you thought`\n`{a}bird`\n`{a}fml`\n`{a}sadcat`\n`{a}say <*msg>",
+                f"```Here are the fun commands```\n`{a}ascii <text>`\n`{a}ga <name> - Guess the age of given name`\n`{a}cat`\n`{a}dog`\n`{a}password <length>`\n`{a}ly <song_name>`\n`{a}sendnuke <user/id>`\n`{a}roast <user/id>`\n`{a}8ball <question>`\n`{a}choose <*args>`\n`{a}choosebestof <*args>`\n`{a}lenny`\n`{a}meme`\n`{a}joke`\n`{a}ipinfo <ip/website>`\n`{a}calc <expression>`\n`{a}activity <num> - Tells activity for given number of persons`\n`{a}remind <time> <type> <*msg> - To set a timer`\n`{a}guess - Guess the person you thought`\n`{a}bird`\n`{a}fml`\n`{a}sadcat`\n`{a}say <*msg>`\n{a}bj`\n",
                 color=0xff0000
             )
             embed.set_author(
@@ -171,4 +171,3 @@ class Help(commands.Cog):
 
 def setup(client):
     client.add_cog(Help(client))
-
