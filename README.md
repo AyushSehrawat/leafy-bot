@@ -25,7 +25,7 @@ Commands:
 
 * Main: general, mod, fun, info, music, setup, extra
 
-* General: rank, lb, ping, avatar, wiki, search, note, notes, trash, poll, quickpoll, remind
+* General: rank, lb, ping, avatar, wiki, search, note, notes, trash, poll, quickpoll, remind, pip/pypi
 
 * Fun: ascii, ga, cat, dog, password, ly, sendnuke, roast, 8ball, choose, choosebestof, lenny, meme, joke, ipinfo, calc, activity, remind, guess, bird, fml, sadcat, say, bj
 
