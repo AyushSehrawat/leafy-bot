@@ -27,24 +27,6 @@ import motor.motor_asyncio
 import nest_asyncio
 nest_asyncio.apply()
 
-
-app = Flask('')
-
-
-@app.route('/')
-def main():
-	return "Your Bot Is Ready"
-
-
-def run():
-	app.run(host="0.0.0.0", port=8080)
-
-
-def keep_alive():
-	server = Thread(target=run)
-	server.start()
-
-
 mongo_url = os.environ.get('MONGO_URL')
 
 cluster = motor.motor_asyncio.AsyncIOMotorClient(mongo_url)
@@ -196,9 +178,6 @@ for filename in os.listdir('./cogs'):
 		client.load_extension(f'cogs.{filename[:-3]}')
 
 client.load_extension("jishaku")
-os.environ["JISHAKU_NO_UNDERSCORE"] = "True"
-
-keep_alive()
 
 token = os.environ.get("BOT_TOKEN")
 
