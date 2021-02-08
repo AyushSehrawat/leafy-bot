@@ -1,7 +1,8 @@
-from discord.ext import commands
-import requests
-import discord
 import datetime
+
+import discord
+import requests
+from discord.ext import commands
 
 
 class Agify(commands.Cog):
@@ -10,16 +11,15 @@ class Agify(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print('Agify cog loaded successfully')
+        print("Agify cog loaded successfully")
 
-    @commands.command(
-        description="Guess age of given name")
+    @commands.command(description="Guess age of given name")
     async def ga(self, ctx, name):
         if name == None:
-            await ctx.send('You forgot name')
+            await ctx.send("You forgot name")
         else:
             name = str(name)
-            URL = f'https://api.agify.io/?name={name}'
+            URL = f"https://api.agify.io/?name={name}"
 
             def check_valid_status_code(request):
                 if request.status_code == 200:
@@ -35,20 +35,20 @@ class Agify(commands.Cog):
 
             age = get_age()
             if not age:
-                await ctx.channel.send(
-                    "Couldn't get age from API. Try again later.")
+                await ctx.channel.send("Couldn't get age from API. Try again later.")
 
             else:
-                agee = str(age['age'])
+                agee = str(age["age"])
                 embed = discord.Embed(
-                    title='Age Guess',
-                    description='Guesses the age of given name!',
-                    color=0xff0000)
-                embed.add_field(
-                    name=name, value=f'I guess he is {agee} years old')
+                    title="Age Guess",
+                    description="Guesses the age of given name!",
+                    color=0xFF0000,
+                )
+                embed.add_field(name=name, value=f"I guess he is {agee} years old")
                 embed.set_footer(
-                    text=f'Requested By: {ctx.author.name}',
-                    icon_url=f'{ctx.author.avatar_url}')
+                    text=f"Requested By: {ctx.author.name}",
+                    icon_url=f"{ctx.author.avatar_url}",
+                )
                 await ctx.send(embed=embed)
 
 

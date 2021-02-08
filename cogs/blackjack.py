@@ -1,19 +1,45 @@
 import asyncio
-import discord
-from discord.ext import commands
 import random
 
-suits = ('Hearts', 'Diamonds', 'Spades', 'Clubs')
-ranks = ('Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace')
-values = {'Two': 2, 'Three': 3, 'Four': 4, 'Five': 5, 'Six': 6, 'Seven': 7, 'Eight': 8, 'Nine': 9, 'Ten': 10,
-          'Jack': 10,
-          'Queen': 10, 'King': 10, 'Ace': 11}
+import discord
+from discord.ext import commands
+
+suits = ("Hearts", "Diamonds", "Spades", "Clubs")
+ranks = (
+    "Two",
+    "Three",
+    "Four",
+    "Five",
+    "Six",
+    "Seven",
+    "Eight",
+    "Nine",
+    "Ten",
+    "Jack",
+    "Queen",
+    "King",
+    "Ace",
+)
+values = {
+    "Two": 2,
+    "Three": 3,
+    "Four": 4,
+    "Five": 5,
+    "Six": 6,
+    "Seven": 7,
+    "Eight": 8,
+    "Nine": 9,
+    "Ten": 10,
+    "Jack": 10,
+    "Queen": 10,
+    "King": 10,
+    "Ace": 11,
+}
 
 playing = True
 
 
 class Card:
-
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
@@ -26,18 +52,19 @@ class Card:
 
 
 class Deck:
-
     def __init__(self):
         self.deck = []  # start with an empty list
         for suit in suits:
             for rank in ranks:
-                self.deck.append(Card(suit, rank))  # build Card objects and add them to the list
+                self.deck.append(
+                    Card(suit, rank)
+                )  # build Card objects and add them to the list
 
     def __str__(self):
-        deck_comp = ''  # start with an empty string
+        deck_comp = ""  # start with an empty string
         for card in self.deck:
-            deck_comp += '\n ' + card.__str__()  # add each Card object's print string
-        return 'The deck has:' + deck_comp
+            deck_comp += "\n " + card.__str__()  # add each Card object's print string
+        return "The deck has:" + deck_comp
 
     def shuffle(self):
         random.shuffle(self.deck)
@@ -56,7 +83,7 @@ class Hand:
     def add_card(self, card):
         self.cards.append(card)
         self.value += values[card.rank]
-        if card.rank == 'Ace':
+        if card.rank == "Ace":
             self.aces += 1  # add to self.aces
 
     def adjust_for_ace(self):
@@ -66,9 +93,10 @@ class Hand:
 
 
 class Chips:
-
     def __init__(self):
-        self.total = 100  # This can be set to a default value or supplied by a user input
+        self.total = (
+            100  # This can be set to a default value or supplied by a user input
+        )
         self.bet = 0
 
     def win_bet(self):
@@ -80,7 +108,7 @@ class Chips:
 
 # Functions
 def take_bet():
-    return 'How many chips would you like to bet? '
+    return "How many chips would you like to bet? "
 
 
 def hit(deck, hand):
@@ -94,10 +122,10 @@ def hit_or_stand(deck, hand, x):
     while True:
         # input h or s
 
-        if x[0].lower() == 'h':
+        if x[0].lower() == "h":
             hit(deck, hand)  # hit() function defined above
 
-        elif x[0].lower() == 's':
+        elif x[0].lower() == "s":
 
             playing = False
             return "Player stands. Dealer is playing."
@@ -112,14 +140,14 @@ def hit_or_stand(deck, hand, x):
 def show_some(player, dealer):
     print("\nDealer's Hand:")
     print(" <card hidden>")
-    print('', dealer.cards[1])
-    print("\nPlayer's Hand:", *player.cards, sep='\n ')
+    print("", dealer.cards[1])
+    print("\nPlayer's Hand:", *player.cards, sep="\n ")
 
 
 def show_all(player, dealer):
-    print("\nDealer's Hand:", *dealer.cards, sep='\n ')
+    print("\nDealer's Hand:", *dealer.cards, sep="\n ")
     print("Dealer's Hand =", dealer.value)
-    print("\nPlayer's Hand:", *player.cards, sep='\n ')
+    print("\nPlayer's Hand:", *player.cards, sep="\n ")
     print("Player's Hand =", player.value)
 
 
@@ -148,18 +176,19 @@ def push(player, dealer):
 
 
 class Bj(commands.Cog):
-
     def __init__(self, client):
         self.client = client
         self.round_number = 0
 
-    @commands.command(aliases=['bj', 'blackjack'])
+    @commands.command(aliases=["bj", "blackjack"])
     async def Bj(self, ctx):
         while True:
             self.round_number += 1
             # Print an opening statement
-            await ctx.channel.send('Welcome to BlackJack! Get as close to 21 as you can without going over!\n\
-            Dealer hits until she reaches 17. Aces count as 1 or 11.\n')
+            await ctx.channel.send(
+                "Welcome to BlackJack! Get as close to 21 as you can without going over!\n\
+            Dealer hits until she reaches 17. Aces count as 1 or 11.\n"
+            )
 
             # Create & shuffle the deck, deal two cards to each player
             deck = Deck()
@@ -182,9 +211,9 @@ class Bj(commands.Cog):
 
             await ctx.channel.send(take_bet())
             try:
-                msg = await self.client.wait_for('message', timeout=30.0, check=check)
+                msg = await self.client.wait_for("message", timeout=30.0, check=check)
             except asyncio.TimeoutError:
-                await ctx.send('Please answer within 30 seconds')
+                await ctx.send("Please answer within 30 seconds")
             else:
                 if int(msg.content) > player_chips.total:
                     await ctx.send("Sorry, your bet can't exceed", player_chips.total)
@@ -192,21 +221,27 @@ class Bj(commands.Cog):
                     player_chips.bet = int(msg.content)
 
             # Show cards (but keep one dealer card hidden)
-            embed = discord.Embed(title="Round {}".format(self.round_number), colour=discord.Colour.blue())
+            embed = discord.Embed(
+                title="Round {}".format(self.round_number), colour=discord.Colour.blue()
+            )
 
-            dealer_cards = " <card hidden>\n" + str(dealer_hand.cards[1]) + "\nTotal: " + str(dealer_hand.cards[1])
+            dealer_cards = (
+                " <card hidden>\n"
+                + str(dealer_hand.cards[1])
+                + "\nTotal: "
+                + str(dealer_hand.cards[1])
+            )
             embed.add_field(name="Dealer's Hand:", value=dealer_cards)
 
             player_cards = ""
             total = 0
             for x in player_hand.cards:
-                player_cards += (str(x) + "\n")
+                player_cards += str(x) + "\n"
                 total += int(str(x))
             player_cards += "Total: " + str(total)
 
             embed.add_field(name="Player's Hand:", value=player_cards)
             await ctx.send(embed=embed)
-
 
             first_time = True
             global playing
@@ -219,31 +254,43 @@ class Bj(commands.Cog):
                 def check(m):
                     return m.author == ctx.author and m.channel == ctx.channel
 
-                await ctx.channel.send("Would you like to Hit or Stand? Enter 'h' or 's' ")
+                await ctx.channel.send(
+                    "Would you like to Hit or Stand? Enter 'h' or 's' "
+                )
                 try:
-                    msg = await self.client.wait_for('message', timeout=30.0, check=check)
+                    msg = await self.client.wait_for(
+                        "message", timeout=30.0, check=check
+                    )
                 except asyncio.TimeoutError:
-                    await ctx.send('Please answer within 30 seconds')
+                    await ctx.send("Please answer within 30 seconds")
                 else:
                     hit_or_stand(deck, player_hand, msg.content)
 
                 # Show cards (but keep one dealer card hidden)
-                embed = discord.Embed(title="Round {}".format(self.round_number + 1), colour=discord.Colour.blue())
+                embed = discord.Embed(
+                    title="Round {}".format(self.round_number + 1),
+                    colour=discord.Colour.blue(),
+                )
 
-                dealer_cards = " <card hidden>\n" + str(dealer_hand.cards[1]) + "\nTotal: " + str(dealer_hand.cards[1])
+                dealer_cards = (
+                    " <card hidden>\n"
+                    + str(dealer_hand.cards[1])
+                    + "\nTotal: "
+                    + str(dealer_hand.cards[1])
+                )
                 embed.add_field(name="Dealer's Hand:", value=dealer_cards)
 
                 player_cards = ""
                 total = 0
                 for x in player_hand.cards:
-                    player_cards += (str(x) + "\n")
+                    player_cards += str(x) + "\n"
                     total += int(str(x))
                 player_cards += "Total: " + str(total)
 
                 embed.add_field(name="Player's Hand:", value=player_cards)
                 await ctx.send(embed=embed)
 
-                           # If player's hand exceeds 21, run player_busts() and break out of loop
+                # If player's hand exceeds 21, run player_busts() and break out of loop
                 if player_hand.value > 21:
                     player_busts(player_hand, dealer_hand, player_chips)
                     break
@@ -259,13 +306,13 @@ class Bj(commands.Cog):
 
                 dealer_cards = ""
                 for i in dealer_hand.cards:
-                    dealer_cards += (str(i) + " ")
+                    dealer_cards += str(i) + " "
                 embed.add_field(name="Dealer's Hand:", value=dealer_cards)
 
                 player_cards = ""
                 total = 0
                 for x in player_hand.cards:
-                    player_cards += (str(x) + " ")
+                    player_cards += str(x) + " "
                     total += int(str(x))
                 player_cards += "Total: " + str(total)
                 embed.add_field(name="Player's Hand:", value=player_cards)
@@ -281,20 +328,24 @@ class Bj(commands.Cog):
                 else:
                     push(player_hand, dealer_hand)
                     # Inform Player of their chips total
-     
-            await ctx.channel.send("\nPlayer's winnings stand at" + str(player_chips.total))
+
+            await ctx.channel.send(
+                "\nPlayer's winnings stand at" + str(player_chips.total)
+            )
 
             # Ask to play again
             def check(m):
                 return m.author == ctx.author and m.channel == ctx.channel
 
-            await ctx.channel.send("Would you like to play another hand? Enter 'y' or 'n' ")
+            await ctx.channel.send(
+                "Would you like to play another hand? Enter 'y' or 'n' "
+            )
             try:
-                msg = await self.client.wait_for('message', timeout=30.0, check=check)
+                msg = await self.client.wait_for("message", timeout=30.0, check=check)
             except asyncio.TimeoutError:
-                await ctx.send('Please answer within 30 seconds')
+                await ctx.send("Please answer within 30 seconds")
             else:
-                if msg.content[0].lower() == 'y':
+                if msg.content[0].lower() == "y":
                     playing = True
                     continue
                 else:

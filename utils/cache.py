@@ -10,7 +10,6 @@ def cache(maxsize=128):
             if no_cache:
                 return func(*args, **kwargs)
 
-
             key_base = "_".join(str(x) for x in args)
             key_end = "_".join(f"{k}:{v}" for k, v in kwargs.items())
             key = f"{key_base}-{key_end}"
@@ -25,7 +24,9 @@ def cache(maxsize=128):
                 cache[key] = res
 
             return res
+
         return inner
+
     return decorator
 
 
@@ -52,5 +53,7 @@ def async_cache(maxsize=128):
                 cache[key] = res
 
             return res
+
         return inner
+
     return decorator

@@ -1,6 +1,6 @@
-from discord.ext import commands
-import requests
 import discord
+import requests
+from discord.ext import commands
 
 
 class Meme(commands.Cog):
@@ -9,13 +9,12 @@ class Meme(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print('Meme cog loaded successfully')
+        print("Meme cog loaded successfully")
 
     @commands.command(description="Shows a random meme")
-    async def meme(self,ctx):
+    async def meme(self, ctx):
         #
-        URL = f'https://meme-api.herokuapp.com/gimme'
-
+        URL = f"https://meme-api.herokuapp.com/gimme"
 
         def check_valid_status_code(request):
             if request.status_code == 200:
@@ -34,27 +33,31 @@ class Meme(commands.Cog):
             await ctx.channel.send("Couldn't get meme from API. Try again later.")
 
         else:
-            caption = memee['title']
-            img = memee['url']
-            nsfw = memee['nsfw']
-            spoiler = memee['spoiler']
-            if nsfw == 'true' or spoiler == 'true':
-                embed= discord.Embed(
+            caption = memee["title"]
+            img = memee["url"]
+            nsfw = memee["nsfw"]
+            spoiler = memee["spoiler"]
+            if nsfw == "true" or spoiler == "true":
+                embed = discord.Embed(
                     timestamp=ctx.message.created_at,
-                    title=f'||{caption}||',color=0xff0000)
-                embed.set_image(url=f'SPOILER_{img}')
+                    title=f"||{caption}||",
+                    color=0xFF0000,
+                )
+                embed.set_image(url=f"SPOILER_{img}")
                 embed.set_footer(
-                    text=f'Requested By: {ctx.author.name}',
-                    icon_url=f'{ctx.author.avatar_url}')
+                    text=f"Requested By: {ctx.author.name}",
+                    icon_url=f"{ctx.author.avatar_url}",
+                )
                 await ctx.send(embed=embed)
             else:
-                embed= discord.Embed(
-                    timestamp=ctx.message.created_at,
-                    title=f'{caption}',color=0xff0000)
-                embed.set_image(url=f'{img}')
+                embed = discord.Embed(
+                    timestamp=ctx.message.created_at, title=f"{caption}", color=0xFF0000
+                )
+                embed.set_image(url=f"{img}")
                 embed.set_footer(
-                    text=f'Requested By: {ctx.author.name}',
-                    icon_url=f'{ctx.author.avatar_url}')
+                    text=f"Requested By: {ctx.author.name}",
+                    icon_url=f"{ctx.author.avatar_url}",
+                )
                 await ctx.send(embed=embed)
 
 

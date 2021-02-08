@@ -1,7 +1,7 @@
 import discord
+from discord.ext.commands import AutoShardedBot, DefaultHelpCommand
 
 from utils import permissions
-from discord.ext.commands import AutoShardedBot, DefaultHelpCommand
 
 
 class Bot(AutoShardedBot):
