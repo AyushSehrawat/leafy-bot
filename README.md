@@ -41,6 +41,8 @@ Commands:
 
 * Extra: invite ( add Leafy!) , vote ( Vote for Leafy!) , suggest ( Suggest us )
 
+* Nsfw - Requires Ksoft api key
+
 
 ### Install Modules/ Dependancies
 

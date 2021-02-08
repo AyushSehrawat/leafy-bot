@@ -159,9 +159,6 @@ class Mod(commands.Cog):
                     description="User is already muted",
                     color=0xFF000,
                 )
-                embed.set_image(
-                    url="https://media1.tenor.com/images/7cb7b5cc74e9a63d11e474a3e135d617/tenor.gif"
-                )
                 await ctx.send(embed=embed)
             else:
                 await user.add_roles(role)
@@ -185,15 +182,12 @@ class Mod(commands.Cog):
                 description="User is already unmuted",
                 color=0xFF000,
             )
-            embed.set_image(
-                url="https://media1.tenor.com/images/7cb7b5cc74e9a63d11e474a3e135d617/tenor.gif"
-            )
             await ctx.send(embed=embed)
 
         else:
             await user.remove_roles(discord.utils.get(ctx.guild.roles, name="Muted"))
             embed = discord.Embed(
-                title="Muted",
+                title="Unmuted",
                 description=f"{user.name} has been unmuted",
                 color=0xFF000,
             )
@@ -210,7 +204,7 @@ class Mod(commands.Cog):
         elif rolename in ctx.guild.roles:
             await member.add_roles(rolename)
             embed = discord.Embed(
-                title="Muted",
+                title="Add Role",
                 description=f"Added {rolename} role to {member.name}",
                 color=0xFF000,
             )
@@ -225,9 +219,6 @@ class Mod(commands.Cog):
             embed = discord.Embed(
                 title="Error", description="Role not found", color=0xFF000
             )
-            embed.set_image(
-                url="https://media.discordapp.net/attachments/791915442259230740/794196807185989632/tenor.gif"
-            )
             await ctx.send(embed=embed)
 
     @commands.command(description="Removed the mentioned role from mentioned user/id")
@@ -240,7 +231,7 @@ class Mod(commands.Cog):
 
             await member.remove_roles(rolename)
             embed = discord.Embed(
-                title="Muted",
+                title="Remove role",
                 description=f"Removed {rolename} role from {member.name}",
                 color=0xFF000,
             )
@@ -255,9 +246,6 @@ class Mod(commands.Cog):
             embed = discord.Embed(
                 title="Error", description="Role not found", color=0xFF000
             )
-            embed.set_image(
-                url="https://media.discordapp.net/attachments/791915442259230740/794196807185989632/tenor.gif"
-            )
             await ctx.send(embed=embed)
 
     @commands.command(description="Locks the channel")
@@ -270,9 +258,6 @@ class Mod(commands.Cog):
                 title="Invalid usage",
                 description="This channel is already locked",
                 color=0xFF000,
-            )
-            embed.set_image(
-                url="https://media1.tenor.com/images/7cb7b5cc74e9a63d11e474a3e135d617/tenor.gif"
             )
             embed.set_footer(
                 text=f"Requested By: {ctx.author.name}",
@@ -305,9 +290,6 @@ class Mod(commands.Cog):
                 title="Invalid usage",
                 description="This channel is already unlocked",
                 color=0xFF000,
-            )
-            embed.set_image(
-                url="https://media1.tenor.com/images/7cb7b5cc74e9a63d11e474a3e135d617/tenor.gif"
             )
             embed.set_footer(
                 text=f"Requested By: {ctx.author.name}",
@@ -349,9 +331,6 @@ class Mod(commands.Cog):
                     description=f"{member.mention} is already blocked",
                     color=0xFF000,
                 )
-                embed.set_image(
-                    url="https://media1.tenor.com/images/7cb7b5cc74e9a63d11e474a3e135d617/tenor.gif"
-                )
                 await ctx.send(embed=embed)
             else:
                 #
@@ -371,9 +350,6 @@ class Mod(commands.Cog):
                 title="Invalid usage",
                 description=f"{member.mention} is already unblocked",
                 color=0xFF000,
-            )
-            embed.set_image(
-                url="https://media1.tenor.com/images/7cb7b5cc74e9a63d11e474a3e135d617/tenor.gif"
             )
             await ctx.send(embed=embed)
 
