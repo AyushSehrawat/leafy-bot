@@ -28,37 +28,37 @@ cluster = motor.motor_asyncio.AsyncIOMotorClient(mongo_url)
 predb = cluster["discord"]["prefix"]
 
 
-async def get_prefix(client, message):
+async def get_prefix(bot, message):
     stats = await predb.find_one({"guild": message.guild.id})
     # server_prefix = stats["prefix"]
     if stats is None:
         updated = {"guild": message.guild.id, "prefix": "--"}
         await predb.insert_one(updated)
         extras = "--"
-        return commands.when_mentioned_or(extras)(client, message)
+        return commands.when_mentioned_or(extras)(bot, message)
     else:
         extras = stats["prefix"]
-        return commands.when_mentioned_or(extras)(client, message)
+        return commands.when_mentioned_or(extras)(bot, message)
 
 
-client = commands.AutoShardedBot(
-    command_prefix=get_prefix, intents=discord.Intents.all()
+bot = commands.AutoShardedBot(
+    command_prefix=get_prefix, intents=discord.Intents.all(), owner_id=727365670395838626
 )
 
-client.remove_command("help")
+bot.remove_command("help")
 
 status = cycle(["Leafy | Ping to know prefix", "Leafy | Ping to know prefix"])
 
 unicode_list = ["\U0001f600", "\U0001f970", "\U0001f609", "\U0001f60a", "\U0001f971"]
 
 
-@client.event
+@bot.event
 async def on_ready():
     change_status.start()
     print("Bot is ready")
 
 
-@client.event
+@bot.event
 async def on_guild_join(guild):
     updated = {"guild": guild.id, "prefix": "--"}
     predb.insert_one(updated)
@@ -122,34 +122,31 @@ async def password(ctx, passlength=10):
         await ctx.author.send(f"You password is \n `{passwor}`")
 
 
-@client.command(hidden=True)
+@bot.command(hidden=True)
 async def load(ctx, extension):
     if ctx.author.id == 727365670395838626:
-        client.load_extension(f"cogs.{extension}")
+        bot.load_extension(f"cogs.{extension}")
         await ctx.send("Done")
 
 
-@client.command(hidden=True)
+@bot.command(hidden=True)
 async def unload(ctx, extension):
-    if ctx.author.id == 727365670395838626:
-        client.unload_extension(f"cogs.{extension}")
+    if ctx.author.id == ctx.bot.owner_id:
+        bot.unload_extension(f"cogs.{extension}")
         await ctx.send("Done")
 
 
-@client.command(hidden=True)
+@bot.command(hidden=True)
 async def reload(ctx, extension):
-    if ctx.author.id == 727365670395838626:
-        client.unload_extension(f"cogs.{extension}")
-        client.load_extension(f"cogs.{extension}")
+    if ctx.author.id == ctx.bot.owner_id:
+        bot.unload_extension(f"cogs.{extension}")
+        bot.load_extension(f"cogs.{extension}")
         await ctx.send("Done")
 
 
-@client.event
+@bot.event
 async def on_message(msg):
-    if (
-        msg.content == "<@791888515100573727>"
-        or msg.content == "<@!791888515100573727>"
-    ):
+    if msg.content == f"<@!{bot.user.id}>":
         stats = await predb.find_one({"guild": msg.guild.id})
         if stats is None:
             pref = "--"
@@ -161,15 +158,15 @@ async def on_message(msg):
             icon_url=msg.author.avatar_url,
         )
         await msg.channel.send(embed=embed)
-    await client.process_commands(msg)
+    await bot.process_commands(msg)
 
 
 for filename in os.listdir("./cogs"):
     if filename.endswith(".py"):
-        client.load_extension(f"cogs.{filename[:-3]}")
+        bot.load_extension(f"cogs.{filename[:-3]}")
 
-client.load_extension("jishaku")
+bot.load_extension("jishaku")
 
 token = os.environ.get("BOT_TOKEN")
 
-client.run(f"{token}")  # Here goes your token in ''
+bot.run(f"{token}")  # Here goes your token in ''
