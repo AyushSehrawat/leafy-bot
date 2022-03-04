@@ -43,7 +43,7 @@ soupsieve==2.1; python_version >= "3.0"
 timeago==1.0.15
 typing-extensions==3.7.4.3
 update-checker==0.18.0
-urllib3==1.26.2
+urllib3==1.26.5
 websocket-client==0.57.0
 werkzeug==1.0.1
 wheel==0.36.2
