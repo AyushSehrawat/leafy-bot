@@ -22,7 +22,7 @@ idna==2.10
 import-expression==1.1.4
 jishaku==1.20.0.220
 ksoftapi==0.3.3a0
-lxml==4.6.5
+lxml==4.9.1
 markupsafe==1.1.1
 motor==2.3.0
 multidict==5.1.0
