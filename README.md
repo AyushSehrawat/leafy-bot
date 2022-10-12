@@ -1,3 +1,7 @@
+Note - This project is not maintained and has old version of dependencies. 
+If you are interested in continuing this project create an issue to let me know. 
+
+
 ![Python-Versions](https://img.shields.io/badge/python-3.8.7-blue?style=flat-square)
 ![Discord.py-Version](https://img.shields.io/badge/discord.py-1.6.0-blue?style=flat-square)
 
